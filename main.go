@@ -17,7 +17,6 @@ func main() {
 
 	// Handler
 	e.GET("/greet", greet)
-	e.GET("/greet:greeting", greet)
 	e.GET("/healthcheck", healthcheck)
 
 	e.Logger.Fatal(e.Start(":80"))
@@ -69,7 +68,7 @@ func greet(c echo.Context) error {
 	case "en":
 		return c.String(http.StatusOK, "Hello World\n")
 	default:
-		return c.String(http.StatusOK, "ジャンボ!!\n")
+		return c.String(http.StatusOK, "ウホホイ!!\n")
 	}
 }
 
