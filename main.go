@@ -18,8 +18,22 @@ func main() {
 	// Handler
 	e.GET("/greet", greet)
 	e.GET("/healthcheck", healthcheck)
-
 	e.Logger.Fatal(e.Start(":80"))
+}
+
+func greet(c echo.Context) error {
+	switch c.QueryParam("lang") {
+	case "jp":
+		return c.String(http.StatusOK, "こんにちは\n")
+	case "en":
+		return c.String(http.StatusOK, "Hello World\n")
+	default:
+		return c.String(http.StatusOK, "ウホホイ!!\n")
+	}
+}
+
+func healthcheck(c echo.Context) error {
+	return c.String(http.StatusOK, "I'm fine\n")
 }
 
 var ResponseLogForamt = `{` +
@@ -59,19 +73,4 @@ func customeSkipper(c echo.Context) bool {
 	} else {
 		return false
 	}
-}
-
-func greet(c echo.Context) error {
-	switch c.QueryParam("lang") {
-	case "jp":
-		return c.String(http.StatusOK, "こんにちは\n")
-	case "en":
-		return c.String(http.StatusOK, "Hello World\n")
-	default:
-		return c.String(http.StatusOK, "ウホホイ!!\n")
-	}
-}
-
-func healthcheck(c echo.Context) error {
-	return c.String(http.StatusOK, "I'm fine\n")
 }
